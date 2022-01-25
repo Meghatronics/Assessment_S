@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../shared/widgets/app_loading_indicator_widget.dart';
+export 'app_routes.dart';
 
-class AppNavigator {
-  AppNavigator._();
+abstract class AppNavigator {
   static final key = GlobalKey<NavigatorState>();
   static BuildContext get currentContext => key.currentState!.context;
 
