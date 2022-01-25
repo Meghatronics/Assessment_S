@@ -21,10 +21,17 @@ class StyleMg {
     fontWeight: FontWeight.w700,
     fontSize: 14,
   );
-  
+
   static final medium14 = GoogleFonts.heebo(
     color: ColorsMg.black1,
     fontWeight: FontWeight.w500,
     fontSize: 14,
+  );
+
+  static final alt5medium = GoogleFonts.heebo(
+    color: ColorsMg.grey5,
+    fontWeight: FontWeight.w500,
+    fontSize: 10,
+    height: 1.4,
   );
 }

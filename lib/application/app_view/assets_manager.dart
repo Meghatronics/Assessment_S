@@ -14,4 +14,7 @@ class AssetsMg {
   static const homeIcon = AssetImage('$_iconsDir/home_icon.png');
   static const routeIcon = AssetImage('$_iconsDir/route_icon.png');
   static const cornerArrowIcon = AssetImage('$_iconsDir/corner_arrow.png');
+  static const locationPlusIcon = AssetImage('$_iconsDir/location-plus_icon.png');
+  static const profileIcon = AssetImage('$_iconsDir/profile_icon.png');
+  static const clockIcon = AssetImage('$_iconsDir/clock_icon.png');
 }
