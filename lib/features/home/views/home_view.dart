@@ -6,11 +6,11 @@ import '../view_models/home_view_model.dart';
 import '../widgets/trip_action_button_widget.dart';
 import '../widgets/white_sheet_widget.dart';
 import 'checking_trip_sheet.dart';
+import 'next_trip_sheet.dart';
 import 'no_trip_sheet.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
-  // static const _buttonChangeSnapPoint = 0.5;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,8 @@ class HomeView extends StatelessWidget {
         builder: (model, _) => SlidingSheet(
           color: Colors.transparent,
           backdropColor: Colors.transparent,
-          cornerRadius: 40,
+          cornerRadius: SizeMg.radius(40),
+          cornerRadiusOnFullscreen: 40,
           controller: model.sheetController,
           listener: (snapState) {
             model.setState();
@@ -30,8 +31,9 @@ class HomeView extends StatelessWidget {
           snapSpec: model.state.snapSpec,
           body: const Placeholder(),
           builder: (_, sheetState) => _SheetView(model, sheetState: sheetState),
-          headerBuilder: (_, sheetState) =>
-              _SheetHeadButton(model, sheetState: sheetState),
+          headerBuilder: (_, sheetState) => sheetState.isCollapsed
+              ? _SheetHeadButton(model, sheetState: sheetState)
+              : const SizedBox.shrink(),
           // footerBuilder: (_, sheetState) =>
           //     _SheetFooter(model, sheetState: sheetState),
         ),
@@ -63,8 +65,8 @@ class _SheetView extends StatelessWidget {
         child = const NoTripSheet();
         break;
       case HomeVmState.atStart:
-      // TODO: Handle this case.
-      // break;
+        child = const NextTripSheet();
+        break;
       case HomeVmState.driving:
       // TODO: Handle this case.
       // break;
@@ -73,8 +75,10 @@ class _SheetView extends StatelessWidget {
       // break;
       case HomeVmState.atEnd:
         // TODO: Handle this case.
-        child = const WhiteSheet(
-          child: SizedBox(height: 300),
+        child = WhiteSheet(
+          children: [
+            SizedBox(height: SizeMg.height(300)),
+          ],
         );
       // break;
     }
@@ -93,37 +97,34 @@ class _SheetHeadButton extends StatelessWidget {
   final SheetState sheetState;
   @override
   Widget build(BuildContext context) {
-    Widget child = const SizedBox.shrink();
-    bool showButton = sheetState.extent <= sheetState.minExtent;
-    // if (!showButton) child = const SizedBox.shrink();
-    if (showButton) {
-      switch (model.state) {
-        case HomeVmState.none:
-        case HomeVmState.checkingTrip:
-        case HomeVmState.noTrip:
-        case HomeVmState.driving:
-          return const SizedBox.shrink();
-        case HomeVmState.atStart:
-          child = TripActionWidget(
-            onPressed: model.startTrip,
-            label: 'Start Trip',
-          );
-          break;
-        case HomeVmState.atStop:
-          child = TripActionWidget(
-            onPressed: model.continueTrip,
-            label: 'Continue trip',
-          );
-          break;
+    Widget child;
 
-        case HomeVmState.atEnd:
-          child = TripActionWidget(
-            onPressed: model.endTrip,
-            label: 'End Trip',
-            red: true,
-          );
-          break;
-      }
+    switch (model.state) {
+      case HomeVmState.none:
+      case HomeVmState.checkingTrip:
+      case HomeVmState.noTrip:
+      case HomeVmState.driving:
+        return const SizedBox.shrink();
+      case HomeVmState.atStart:
+        child = TripActionWidget(
+          onPressed: model.startTrip,
+          label: 'Start Trip',
+        );
+        break;
+      case HomeVmState.atStop:
+        child = TripActionWidget(
+          onPressed: model.continueTrip,
+          label: 'Continue trip',
+        );
+        break;
+
+      case HomeVmState.atEnd:
+        child = TripActionWidget(
+          onPressed: model.endTrip,
+          label: 'End Trip',
+          red: true,
+        );
+        break;
     }
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 700),

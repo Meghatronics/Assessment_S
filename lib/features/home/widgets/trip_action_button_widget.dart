@@ -16,16 +16,16 @@ class TripActionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        bottom: 12.0,
-        right: 20.0,
+      padding: EdgeInsets.only(
+        bottom: SizeMg.padV(12.0),
+        right: SizeMg.padH(20.0),
       ),
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
             backgroundColor: red ? ColorsMg.redDefault : ColorsMg.primary,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(32)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(SizeMg.radius(32)),
             ),
             padding: const EdgeInsets.all(16),
             minimumSize: const Size(104, 56)),
@@ -37,11 +37,11 @@ class TripActionWidget extends StatelessWidget {
                 color: red ? ColorsMg.backgroundWhite : ColorsMg.black1,
               ),
             ),
-            const SizedBox(width: 8),
-            const Image(
+            SizedBox(width: SizeMg.padH(8)),
+            Image(
               image: AssetsMg.cornerArrowIcon,
-              height: 24,
-              width: 24,
+              height: SizeMg.radius(24),
+              width: SizeMg.radius(24),
             ),
           ],
         ),

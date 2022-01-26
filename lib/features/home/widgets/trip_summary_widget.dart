@@ -14,7 +14,10 @@ class TripSummaryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      padding: EdgeInsets.symmetric(
+        horizontal: SizeMg.padH(20),
+        vertical: SizeMg.padV(16),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -49,10 +52,10 @@ class TripSummaryChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 24,
-      padding: const EdgeInsets.symmetric(
-        vertical: 4,
-        horizontal: 8,
+      height: SizeMg.height(24),
+      padding: EdgeInsets.symmetric(
+        vertical: SizeMg.padV(4),
+        horizontal: SizeMg.padH(8),
       ),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(
@@ -65,9 +68,9 @@ class TripSummaryChip extends StatelessWidget {
           ImageIcon(
             _iconImage,
             color: ColorsMg.grey5,
-            size: 10,
+            size: SizeMg.radius(10),
           ),
-          const SizedBox(width: 4),
+          SizedBox(width: SizeMg.radius(4)),
           Text(
             label,
             style: StyleMg.alt5medium,

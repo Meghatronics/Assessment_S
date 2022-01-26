@@ -1,5 +1,6 @@
 import 'package:sliding_sheet/sliding_sheet.dart';
 
+import '../../../application/app_view/size_manager.dart';
 import '../../../application/app_view_model/app_view_model.dart';
 
 enum HomeVmState {
@@ -28,18 +29,18 @@ extension HomeVmStateData on HomeVmState {
   SnapSpec get snapSpec {
     switch (this) {
       case HomeVmState.checkingTrip:
-        return const SnapSpec(
+        return SnapSpec(
           snap: false,
-          snappings: [209, 210],
+          snappings: [SizeMg.height(209), SizeMg.height(210)],
           positioning: SnapPositioning.pixelOffset,
-          initialSnap: 210,
+          initialSnap: SizeMg.height(210),
         );
       case HomeVmState.noTrip:
-        return const SnapSpec(
+        return SnapSpec(
           snap: false,
-          snappings: [399, 400],
+          snappings: [SizeMg.height(399), SizeMg.height(400)],
           positioning: SnapPositioning.pixelOffset,
-          initialSnap: 400,
+          initialSnap: SizeMg.height(400),
         );
       case HomeVmState.atStart:
         return const SnapSpec(

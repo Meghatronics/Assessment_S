@@ -1,32 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
 import '../../application/app_view/app_view.dart';
 
 class AppLoadingIndicator extends StatelessWidget {
   final bool centered;
+  final double radius;
+  final int ticks;
+  final Color activeColor;
+  final Color backColor;
 
-  const AppLoadingIndicator({Key? key, this.centered = true}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return centered
-        ? const Center(child: _AppLoadingIndicator())
-        : const _AppLoadingIndicator();
-  }
-}
-
-class _AppLoadingIndicator extends StatelessWidget {
-  const _AppLoadingIndicator({
+  const AppLoadingIndicator({
     Key? key,
+    this.centered = true,
+    this.radius = 12,
+    this.ticks = 10,
+    this.activeColor = ColorsMg.primary,
+    this.backColor = ColorsMg.grey10,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const CircularProgressIndicator(
-      strokeWidth: 1.5,
-      backgroundColor: ColorsMg.grey10,
-      valueColor: AlwaysStoppedAnimation(ColorsMg.primary),
-    );
+    return centered
+        ? Center(
+            child: NutsActivityIndicator(
+              activeColor: activeColor,
+              inactiveColor: backColor,
+              tickCount: ticks,
+              radius: SizeMg.radius(radius),
+            ),
+          )
+        : NutsActivityIndicator(
+            activeColor: activeColor,
+            inactiveColor: backColor,
+            tickCount: ticks,
+            radius: SizeMg.radius(radius),
+          );
   }
 }
 

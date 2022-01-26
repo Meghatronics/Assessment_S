@@ -15,8 +15,8 @@ class SheetHeadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 20.0,
+      padding: EdgeInsets.symmetric(
+        horizontal: SizeMg.padV(20.0),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,10 +38,11 @@ class SheetHeadingWidget extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 16),
-          const Image(
+          SizedBox(width: SizeMg.padH(16)),
+          Image(
             image: AssetsMg.shuttlerBus,
-            height: 32,
+            height: SizeMg.height(33),
+            width: SizeMg.width(31),
           )
         ],
       ),

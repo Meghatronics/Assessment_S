@@ -40,11 +40,16 @@ class CustomNavBarState extends State<CustomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
+      height: SizeMg.height(80),
       decoration: const BoxDecoration(
         color: ColorsMg.backgroundWhite,
       ),
-      padding: const EdgeInsets.fromLTRB(8, 16, 8, 24),
+      padding: EdgeInsets.fromLTRB(
+        SizeMg.padH(8),
+        SizeMg.padH(16),
+        SizeMg.padH(8),
+        SizeMg.padH(24),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -55,6 +60,7 @@ class CustomNavBarState extends State<CustomNavBar> {
                 child: ImageIcon(
                   _dashIcons[i],
                   color: _index == i ? ColorsMg.primary : ColorsMg.grey7,
+                  size: SizeMg.width(24),
                 ),
               ),
             ),
@@ -63,7 +69,7 @@ class CustomNavBarState extends State<CustomNavBar> {
               onTap: () => navigateToIndex(2),
               child: CircleAvatar(
                 backgroundImage: widget.profileImage,
-                radius: 14,
+                radius: SizeMg.radius(16),
               ),
             ),
           ),

@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import '../../../application/app_view/app_view.dart';
 
 class WhiteSheet extends StatelessWidget {
-  const WhiteSheet({Key? key, required this.child}) : super(key: key);
-  final Widget child;
+  const WhiteSheet({Key? key, required this.children}) : super(key: key);
+  final List<Widget> children;
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: ColorsMg.backgroundWhite,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(SizeMg.radius(40)),
+        ),
       ),
       constraints: const BoxConstraints.tightFor(width: double.maxFinite),
       child: Column(
@@ -18,9 +20,12 @@ class WhiteSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: 48,
-            height: 4,
-            margin: const EdgeInsets.only(top: 8, bottom: 16),
+            width: SizeMg.width(48),
+            height: SizeMg.height(4),
+            margin: EdgeInsets.only(
+              top: SizeMg.padV(8),
+              bottom: SizeMg.padV(16),
+            ),
             decoration: const BoxDecoration(
               color: ColorsMg.grey10,
               borderRadius: BorderRadius.all(
@@ -28,7 +33,7 @@ class WhiteSheet extends StatelessWidget {
               ),
             ),
           ),
-          Flexible(child: child),
+          ...children,
         ],
       ),
     );
