@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../application/app_view/app_view.dart';
-import '../widgets/white_sheet_widget.dart';
+import '../../../../../application/app_view/app_view.dart';
+import '../../widgets/white_sheet_widget.dart';
 
 class NoTripSheet extends StatelessWidget {
   const NoTripSheet({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class NoTripSheet extends StatelessWidget {
       // child: Column(
       //   mainAxisAlignment: MainAxisAlignment.center,
       children: [
-         SizedBox(height: SizeMg.height(32)),
+        SizedBox(height: SizeMg.height(32)),
         Image(
           image: AssetsMg.noTripMap,
           height: SizeMg.radius(74),

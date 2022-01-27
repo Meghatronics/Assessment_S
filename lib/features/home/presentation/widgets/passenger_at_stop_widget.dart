@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../application/app_view/app_view.dart';
-import '../../../shared/widgets/app_loading_indicator_widget.dart';
+import '../../../../application/app_view/app_view.dart';
+import '../../../../shared/widgets/app_loading_indicator_widget.dart';
 
 class PassengersAtStopWidget extends StatelessWidget {
   const PassengersAtStopWidget({Key? key, required this.stopName})
@@ -18,9 +18,10 @@ class PassengersAtStopWidget extends StatelessWidget {
           children: [
             Row(
               children: [
-                Image(
-                  image: AssetsMg.busIconRounded,
-                  width: SizeMg.radius(18),
+                ImageIcon(
+                  AssetsMg.busIconRounded,
+                  size: SizeMg.radius(18),
+                  color: ColorsMg.greenDark,
                 ),
                 SizedBox(width: SizeMg.width(6)),
                 Expanded(
@@ -68,12 +69,7 @@ class PassengersAtStopWidget extends StatelessWidget {
                 (_) => _PassengerListTile(),
               ),
             ),
-            Column(
-              children: List.generate(
-                5,
-                (_) => _PassengerListTile(),
-              ),
-            ),
+           
           ],
         ),
         // )
@@ -162,9 +158,7 @@ class _PassengerButtonState extends State<_PassengerButton> {
     color: Colors.transparent,
     borderRadius: BorderRadius.all(Radius.circular(4)),
     border: Border.fromBorderSide(
-      BorderSide(
-        color: Color(0xFFB9BCC8),
-      ),
+      BorderSide(color: ColorsMg.grey6),
     ),
   );
 

@@ -22,7 +22,7 @@ class ThisApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
-      minTextAdapt: true,
+      minTextAdapt: false,
       builder: () => MaterialApp(
         title: Constants.appName,
         debugShowCheckedModeBanner: false,

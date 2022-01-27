@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../application/app_view/app_view.dart';
+import '../../../../application/app_view/app_view.dart';
 
 class SheetHeadingWidget extends StatelessWidget {
   const SheetHeadingWidget({
@@ -16,7 +16,7 @@ class SheetHeadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: SizeMg.padV(20.0),
+        horizontal: SizeMg.padH(20.0),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

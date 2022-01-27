@@ -20,6 +20,7 @@ class AppViewModel extends ChangeNotifier {
     _disposed = true;
   }
 
+  @protected
   void setState([VmState? viewState]) {
     if (viewState != null) _viewState = viewState;
     if (!_disposed && hasListeners) notifyListeners();
@@ -30,6 +31,6 @@ class AppViewModel extends ChangeNotifier {
   //   Function? retryCallback,
   //   String? title,
   // }) {
-  //  
+  //
   // }
 }

@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 
-import '../../../application/app_view/app_view.dart';
+import '../../../../application/app_view/app_view.dart';
 import '../view_models/home_view_model.dart';
+import '../widgets/black_start_to_end_summary_widget.dart';
+import '../widgets/swipe_button_widget.dart';
 import '../widgets/trip_action_button_widget.dart';
-import '../widgets/white_sheet_widget.dart';
-import 'checking_trip_sheet.dart';
-import 'next_trip_sheet.dart';
-import 'no_trip_sheet.dart';
+import 'home_map_view.dart';
+import 'home_sheets/at_stop_trip_sheet.dart';
+import 'home_sheets/checking_trip_sheet.dart';
+import 'home_sheets/driving_sheet.dart';
+import 'home_sheets/end_trip_sheet.dart';
+import 'home_sheets/next_trip_sheet.dart';
+import 'home_sheets/no_trip_sheet.dart';
+
+bool isCollapsed = false;
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -23,19 +30,23 @@ class HomeView extends StatelessWidget {
           color: Colors.transparent,
           backdropColor: Colors.transparent,
           cornerRadius: SizeMg.radius(40),
-          cornerRadiusOnFullscreen: 40,
+          cornerRadiusOnFullscreen: SizeMg.radius(40),
+          isBackdropInteractable: true,
           controller: model.sheetController,
           listener: (snapState) {
-            model.setState();
+            if (snapState.isCollapsed != isCollapsed) model.setState();
+            isCollapsed = snapState.isCollapsed;
           },
           snapSpec: model.state.snapSpec,
-          body: const Placeholder(),
+          body: const HomeMapView(),
           builder: (_, sheetState) => _SheetView(model, sheetState: sheetState),
           headerBuilder: (_, sheetState) => sheetState.isCollapsed
               ? _SheetHeadButton(model, sheetState: sheetState)
               : const SizedBox.shrink(),
-          // footerBuilder: (_, sheetState) =>
-          //     _SheetFooter(model, sheetState: sheetState),
+          footerBuilder: (_, sheetState) => !sheetState.isCollapsed ||
+                  [4, 5, 6].any((e) => e == model.state.index)
+              ? _SheetFooter(model, sheetState: sheetState)
+              : const SizedBox.shrink(),
         ),
       ),
     );
@@ -68,19 +79,14 @@ class _SheetView extends StatelessWidget {
         child = const NextTripSheet();
         break;
       case HomeVmState.driving:
-      // TODO: Handle this case.
-      // break;
+        child = DrivingSheet(stopName: model.stopName);
+        break;
       case HomeVmState.atStop:
-      // TODO: Handle this case.
-      // break;
+        child = AtStopTripSheet(stopName: model.stopName);
+        break;
       case HomeVmState.atEnd:
-        // TODO: Handle this case.
-        child = WhiteSheet(
-          children: [
-            SizedBox(height: SizeMg.height(300)),
-          ],
-        );
-      // break;
+        child = AtEndTripSheet(stopName: model.stopName);
+        break;
     }
     return child;
   }
@@ -149,24 +155,51 @@ class _SheetFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (model.state) {
       case HomeVmState.none:
-        return const SizedBox.shrink();
       case HomeVmState.checkingTrip:
-        return const CheckingTripSheet();
       case HomeVmState.noTrip:
-        return const NoTripSheet();
+        return const SizedBox.shrink();
       case HomeVmState.atStart:
-        // TODO: Handle this case.
-        break;
+        return SwipeButtonWidget(
+          label: 'Start Trip',
+          onSwipe: model.startTrip,
+        );
       case HomeVmState.driving:
-        // TODO: Handle this case.
-        break;
+        return const BlackStartToEndSummary(
+          start: 'Chevron Lekki II',
+          end: 'Sandfill, Lekki I',
+        );
       case HomeVmState.atStop:
-        // TODO: Handle this case.
-        break;
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const BlackStartToEndSummary(
+              start: 'Chevron Lekki II',
+              end: 'Sandfill, Lekki I',
+            ),
+            if (!sheetState.isCollapsed)
+              SwipeButtonWidget(
+                label: 'Continue trip',
+                onSwipe: model.continueTrip,
+              ),
+          ],
+        );
       case HomeVmState.atEnd:
-        // TODO: Handle this case.
-        break;
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const BlackStartToEndSummary(
+              start: 'Chevron Lekki II',
+              end: 'Sandfill, Lekki I',
+            ),
+            if (!sheetState.isCollapsed)
+              SwipeButtonWidget(
+                label: 'End trip',
+                onSwipe: model.endTrip,
+                color: ColorsMg.redDefault,
+                labelColor: ColorsMg.backgroundWhite,
+              ),
+          ],
+        );
     }
-    return SizedBox(height: 600);
   }
 }

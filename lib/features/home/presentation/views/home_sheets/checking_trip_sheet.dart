@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../application/app_view/app_view.dart';
-import '../../../shared/widgets/app_loading_indicator_widget.dart';
-import '../widgets/white_sheet_widget.dart';
+import '../../../../../application/app_view/app_view.dart';
+import '../../../../../shared/widgets/app_loading_indicator_widget.dart';
+import '../../widgets/white_sheet_widget.dart';
 
 class CheckingTripSheet extends StatelessWidget {
   const CheckingTripSheet({Key? key}) : super(key: key);

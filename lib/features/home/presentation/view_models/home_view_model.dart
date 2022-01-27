@@ -1,7 +1,8 @@
 import 'package:sliding_sheet/sliding_sheet.dart';
 
-import '../../../application/app_view/size_manager.dart';
-import '../../../application/app_view_model/app_view_model.dart';
+import '../../../../application/app_view/size_manager.dart';
+import '../../../../application/app_view_model/app_view_model.dart';
+import 'home_map_view_model.dart';
 
 enum HomeVmState {
   none,
@@ -43,40 +44,44 @@ extension HomeVmStateData on HomeVmState {
           initialSnap: SizeMg.height(400),
         );
       case HomeVmState.atStart:
-        return const SnapSpec(
+        return SnapSpec(
           snap: true,
-          snappings: [0.3, 0.6, 0.7],
-          positioning: SnapPositioning.relativeToAvailableSpace,
-          initialSnap: 0.3,
+          snappings: [
+            SizeMg.height(210 + 56 + 16),
+            SizeMg.height(434),
+            SizeMg.height(536),
+          ],
+          positioning: SnapPositioning.pixelOffset,
+          initialSnap: SizeMg.height(210 + 56 + 16),
         );
 
       case HomeVmState.driving:
-        return const SnapSpec(
+        return SnapSpec(
           snap: true,
-          snappings: [0.3, 0.5],
-          positioning: SnapPositioning.relativeToAvailableSpace,
-          initialSnap: 0.3,
+          snappings: [SizeMg.height(112), SizeMg.height(336)],
+          positioning: SnapPositioning.pixelOffset,
+          initialSnap: SizeMg.height(112),
         );
       case HomeVmState.atStop:
-        return const SnapSpec(
+        return SnapSpec(
           snap: true,
-          snappings: [0.55, 0.7, 0.85],
-          positioning: SnapPositioning.relativeToAvailableSpace,
-          initialSnap: 0.55,
+          snappings: [SizeMg.height(360 + 56 + 16), SizeMg.height(584)],
+          positioning: SnapPositioning.pixelOffset,
+          initialSnap: SizeMg.height(360 + 56 + 16),
         );
       case HomeVmState.atEnd:
-        return const SnapSpec(
+        return SnapSpec(
           snap: true,
-          snappings: [0.55, 0.7],
-          positioning: SnapPositioning.relativeToAvailableSpace,
-          initialSnap: 0.55,
+          snappings: [SizeMg.height(360 + 56 + 16), SizeMg.height(584)],
+          positioning: SnapPositioning.pixelOffset,
+          initialSnap: SizeMg.height(360 + 56 + 16),
         );
       case HomeVmState.none:
         return const SnapSpec(
-          snap: true,
+          snap: false,
           snappings: [0.3, 0.5],
           positioning: SnapPositioning.relativeToAvailableSpace,
-          initialSnap: 0.3,
+          initialSnap: 0.2,
         );
     }
   }
@@ -85,11 +90,16 @@ extension HomeVmStateData on HomeVmState {
 class HomeViewModel extends AppViewModel {
   HomeVmState _state = HomeVmState.none;
   final SheetController _sheetController;
+  final HomeMapViewModel mapViewModel;
 
-  HomeViewModel() : _sheetController = SheetController();
+  HomeViewModel({
+    required this.mapViewModel,
+  }) : _sheetController = SheetController();
 
   HomeVmState get state => _state;
   SheetController get sheetController => _sheetController;
+  String get stopName => _stopName;
+  String _stopName = 'Osapa London';
 
   void _changeState(HomeVmState newState) {
     _state = newState;
@@ -117,10 +127,25 @@ class HomeViewModel extends AppViewModel {
 
   void startTrip() {
     //TODO Implement StartTrip
+    _changeState(HomeVmState.driving);
+    Future.delayed(const Duration(seconds: 4), () {
+      _changeState(HomeVmState.atStop);
+    });
   }
+
   void continueTrip() {
     //TODO Implement ContinueTrip
+    if (_stopName == 'Osapa London') {
+      _stopName = 'Sandfill, Lekki';
+      startTrip();
+    } else {
+      _changeState(HomeVmState.driving);
+      Future.delayed(const Duration(seconds: 4), () {
+        _changeState(HomeVmState.atEnd);
+      });
+    }
   }
+
   void endTrip() {
     //TODO Implement EndTrip
   }

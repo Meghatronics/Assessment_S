@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../application/app_routing/app_router.dart';
 import '../../application/app_routing/app_routes.dart';
-import '../home/views/home_view.dart';
+import '../home/presentation/views/home_view.dart';
 import 'dashboard_view.dart';
 
 export '../../application/app_routing/app_routes.dart';

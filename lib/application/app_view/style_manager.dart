@@ -28,9 +28,28 @@ class StyleMg {
     fontSize: SizeMg.text(14),
   );
 
+  static final alt4medium = GoogleFonts.heebo(
+    color: ColorsMg.grey5,
+    fontWeight: FontWeight.w500,
+    fontSize: SizeMg.text(12),
+    height: 1.4,
+  );
+  static final alt4regular = GoogleFonts.heebo(
+    color: ColorsMg.grey5,
+    fontWeight: FontWeight.w400,
+    fontSize: SizeMg.text(12),
+    height: 1.4,
+  );
+
   static final alt5medium = GoogleFonts.heebo(
     color: ColorsMg.grey5,
     fontWeight: FontWeight.w500,
+    fontSize: SizeMg.text(10),
+    height: 1.4,
+  );
+  static final alt5regular = GoogleFonts.heebo(
+    color: ColorsMg.grey5,
+    fontWeight: FontWeight.w400,
     fontSize: SizeMg.text(10),
     height: 1.4,
   );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../application/app_view/app_view.dart';
+import '../../../../application/app_view/app_view.dart';
 
 class TripSummaryWidget extends StatelessWidget {
   const TripSummaryWidget({Key? key, required this.chips})

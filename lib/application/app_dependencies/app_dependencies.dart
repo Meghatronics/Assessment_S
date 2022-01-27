@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 
-import '../../features/home/view_models/home_view_model.dart';
+import '../../features/home/presentation/view_models/home_map_view_model.dart';
+import '../../features/home/presentation/view_models/home_view_model.dart';
 
 class AppDependencies {
   AppDependencies._();
@@ -13,6 +14,9 @@ class AppDependencies {
   }
 
   void _homeDependencies() {
-    locate.registerLazySingleton(() => HomeViewModel());
+    locate.registerLazySingleton(() => HomeViewModel(
+          mapViewModel: locate(),
+        ));
+    locate.registerLazySingleton(() => HomeMapViewModel());
   }
 }
