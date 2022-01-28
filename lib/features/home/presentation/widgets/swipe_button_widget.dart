@@ -8,6 +8,7 @@ class SwipeButtonWidget extends SwipeableTile {
     Key? key,
     required this.onSwipe,
     required this.label,
+    Widget? underSwipeWidget,
     TextDirection swipeDirection = TextDirection.ltr,
     Color color = ColorsMg.primary,
     this.labelColor = ColorsMg.black1,
@@ -16,9 +17,8 @@ class SwipeButtonWidget extends SwipeableTile {
           key: key ?? const Key('swipe_button'),
           color: color,
           isEelevated: false,
-          backgroundBuilder: (_, direction, progress) {
-            return Container(color: ColorsMg.black1);
-          },
+          backgroundBuilder: (_, direction, progress) =>
+              underSwipeWidget ?? Container(color: ColorsMg.black1),
           borderRadius: 0,
           direction: swipeDirection == TextDirection.ltr
               ? SwipeDirection.startToEnd
@@ -86,25 +86,6 @@ class _ChevronAnimationState extends State<ChevronAnimation>
 
     super.initState();
   }
-  // @override
-  // void initState() {
-  //   _controllers = List.generate(
-  //     6,
-  //     (index) => AnimationController(
-  //         value: _opacityTrail[index],
-  //         animationBehavior: AnimationBehavior.preserve,
-  //         vsync: this,
-  //         lowerBound: 0,
-  //         upperBound: 1,
-  //         duration: const Duration(milliseconds: 1000))
-  //       ..repeat().orCancel
-  //       ..addListener(() {
-  //         setState(() {});
-  //       }),
-  //   );
-
-  //   super.initState();
-  // }
 
   static const _opacityTrail = [0.2, 0.35, 0.5, 0.65, 0.8, 0.95];
   @override
@@ -121,7 +102,7 @@ class _ChevronAnimationState extends State<ChevronAnimation>
       mainAxisSize: MainAxisSize.min,
       children: [
         for (int i = 0; i < 5; i++)
-         AnimatedOpacity(
+          AnimatedOpacity(
             opacity: _animations[5 - i].value,
             duration: const Duration(microseconds: 500),
             // curve: Curves.fastOutSlowIn,
@@ -130,7 +111,7 @@ class _ChevronAnimationState extends State<ChevronAnimation>
               child: Image(
                 image: AssetsMg.caretRightIcon,
                 // width: 16,
-                height: 16,
+                height: 12,
               ),
               // Icon(
               //   Icons.chevron_right_rounded,

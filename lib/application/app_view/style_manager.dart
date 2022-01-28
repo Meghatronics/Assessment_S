@@ -28,6 +28,19 @@ class StyleMg {
     fontSize: SizeMg.text(14),
   );
 
+  static final alt0medium = GoogleFonts.heebo(
+    color: ColorsMg.grey5,
+    fontWeight: FontWeight.w500,
+    fontSize: SizeMg.text(24),
+    height: 1.4,
+  );
+  // static final alt0regular = GoogleFonts.heebo(
+  //   color: ColorsMg.grey5,
+  //   fontWeight: FontWeight.w400,
+  //   fontSize: SizeMg.text(24),
+  //   height: 1.4,
+  // );
+
   static final alt4medium = GoogleFonts.heebo(
     color: ColorsMg.grey5,
     fontWeight: FontWeight.w500,

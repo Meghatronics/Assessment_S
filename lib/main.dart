@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'application/app_dependencies/app_dependencies.dart';
 import 'application/app_routing/app_navigator.dart';
@@ -32,8 +33,8 @@ class ThisApp extends StatelessWidget {
         initialRoute: dashboardRoute,
         //? THEMING
         theme: ThemeData(
-          //   primaryColor: themePrimaryPurple,
-          //   scaffoldBackgroundColor: backgroundWhite,
+          primaryColor: ColorsMg.primary,
+          scaffoldBackgroundColor: ColorsMg.backgroundWhite,
           //   splashColor: altYellow.withOpacity(0.5),
           //   textSelectionTheme: TextSelectionThemeData(
           //     cursorColor: themePrimaryPurple,
@@ -41,8 +42,7 @@ class ThisApp extends StatelessWidget {
           //     selectionHandleColor: altYellow,
           //   ),
           //   backgroundColor: const Color(0xFFE6EBF1),
-          //   accentColor: altPink,
-          //   textTheme: GoogleFonts.muliTextTheme(),
+          textTheme: GoogleFonts.heeboTextTheme(),
           dividerTheme: DividerThemeData(
             color: ColorsMg.grey10,
             thickness: SizeMg.radius(1),

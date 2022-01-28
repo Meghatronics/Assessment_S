@@ -49,14 +49,14 @@ class _TripItineraryWidgetState extends State<TripItineraryWidget> {
                 ),
               ),
               if (_expanded)
-                TextButton(
-                  onPressed: _collapse,
-                  style: TextButton.styleFrom(
-                    fixedSize: Size(
-                      SizeMg.width(68),
-                      SizeMg.height(20),
-                    ),
-                  ),
+                InkWell(
+                  onTap: _collapse,
+                  // style: TextButton.styleFrom(
+                  //   fixedSize: Size(
+                  //     SizeMg.width(68),
+                  //     SizeMg.height(20),
+                  //   ),
+                  // ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.end,

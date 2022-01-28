@@ -4,6 +4,9 @@ abstract class ColorsMg {
   static const textBlack = Color(0xFF333333);
   static const backgroundWhite = Color(0xFFFFFFFF);
   static const primary = Color(0xFF20E682);
+  static const primaryDark = Color(0xFF109352);
+  static const primaryLighter = Color(0xFF91F3C2);
+  static const green = Color(0xFF006156);
   static const greenDark = Color(0xFF003D36);
 
   //Grey
@@ -15,9 +18,10 @@ abstract class ColorsMg {
   static const grey6 = Color(0xFFB9BCC8);
   static const grey7 = Color(0xFFB2B2B2);
   static const grey8 = Color(0xFFE0E6ED);
+  static const grey9 = Color(0xFFE5E9F2);
   static const grey10 = Color(0xFFEFF2F7);
   static const grey11 = Color(0xFFF9FBFA);
 
   static const redDefault = Color(0xFFE13D45);
-  static const color =Color(0xFFdde2e3);
+  static const color = Color(0xFFdde2e3);
 }

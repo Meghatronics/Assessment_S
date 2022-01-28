@@ -1,3 +1,4 @@
+export '../../shared/widgets/app_button_widget.dart';
 export '../app_dependencies/app_dependencies.dart';
 export 'app_view_builder.dart';
 export 'assets_manager.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shuttlers_test/utilities/constants.dart';
 
 import '../../../../application/app_view/app_view.dart';
 import '../../../../shared/widgets/app_loading_indicator_widget.dart';
@@ -69,7 +70,6 @@ class PassengersAtStopWidget extends StatelessWidget {
                 (_) => _PassengerListTile(),
               ),
             ),
-           
           ],
         ),
         // )
@@ -92,8 +92,7 @@ class _PassengerListTile extends StatelessWidget {
           CircleAvatar(
             radius: SizeMg.radius(12),
             backgroundColor: ColorsMg.greenDark,
-            backgroundImage: const NetworkImage(
-                'https://randomuser.me/api/portraits/thumb/men/75.jpg'),
+            backgroundImage: AssetsMg.dummyImage,
           ),
           SizedBox(width: SizeMg.padH(8)),
           Expanded(

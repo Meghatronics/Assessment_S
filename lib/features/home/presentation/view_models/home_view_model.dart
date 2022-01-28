@@ -103,6 +103,7 @@ class HomeViewModel extends AppViewModel {
 
   void _changeState(HomeVmState newState) {
     _state = newState;
+    mapViewModel.update(_state);
     _sheetController.snapToExtent(
       _state.snapSpec.initialSnap ?? _state.snapSpec.minSnap,
     );
@@ -136,9 +137,10 @@ class HomeViewModel extends AppViewModel {
   void continueTrip() {
     //TODO Implement ContinueTrip
     if (_stopName == 'Osapa London') {
-      _stopName = 'Sandfill, Lekki';
+      _stopName = 'Lagoon front';
       startTrip();
     } else {
+      _stopName = 'Sandfill, Lekki';
       _changeState(HomeVmState.driving);
       Future.delayed(const Duration(seconds: 4), () {
         _changeState(HomeVmState.atEnd);
@@ -147,6 +149,7 @@ class HomeViewModel extends AppViewModel {
   }
 
   void endTrip() {
-    //TODO Implement EndTrip
+    _changeState(HomeVmState.noTrip);
+    AppNavigator.pushNamed(ratePassengersViewRoute);
   }
 }

@@ -132,13 +132,23 @@ class _SheetHeadButton extends StatelessWidget {
         );
         break;
     }
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 700),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [child],
-      ),
-    );
+    return child is SizedBox
+        ? child
+        : TweenAnimationBuilder<Offset>(
+            tween: Tween(
+              begin: Offset(-SizeMg.height(32), SizeMg.height(32)),
+              end: Offset.zero,
+            ),
+            curve: Curves.fastOutSlowIn,
+            duration: const Duration(milliseconds: 400),
+            builder: (_, offset, __) => Transform.translate(
+              offset: offset,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [child],
+              ),
+            ),
+          );
   }
 }
 
@@ -151,25 +161,37 @@ class _SheetFooter extends StatelessWidget {
 
   final HomeViewModel model;
   final SheetState sheetState;
+
+  static final _heightA = SizeMg.height(50);
+  static final _heightB = SizeMg.height(92);
   @override
   Widget build(BuildContext context) {
+    Widget child;
+    double height;
     switch (model.state) {
       case HomeVmState.none:
       case HomeVmState.checkingTrip:
       case HomeVmState.noTrip:
-        return const SizedBox.shrink();
+        child = const SizedBox.shrink();
+        height = 0;
+        break;
       case HomeVmState.atStart:
-        return SwipeButtonWidget(
+        height = _heightA;
+        child = SwipeButtonWidget(
           label: 'Start Trip',
           onSwipe: model.startTrip,
         );
+        break;
       case HomeVmState.driving:
-        return const BlackStartToEndSummary(
+        height = _heightA;
+        child = const BlackStartToEndSummary(
           start: 'Chevron Lekki II',
           end: 'Sandfill, Lekki I',
         );
+        break;
       case HomeVmState.atStop:
-        return Column(
+        height = sheetState.isCollapsed ? _heightA : _heightB;
+        child = Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             const BlackStartToEndSummary(
@@ -183,8 +205,10 @@ class _SheetFooter extends StatelessWidget {
               ),
           ],
         );
+        break;
       case HomeVmState.atEnd:
-        return Column(
+        height = sheetState.isCollapsed ? _heightA : _heightB;
+        child = Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             const BlackStartToEndSummary(
@@ -200,6 +224,20 @@ class _SheetFooter extends StatelessWidget {
               ),
           ],
         );
+        break;
     }
+    return child is SizedBox
+        ? child
+        : TweenAnimationBuilder<Offset>(
+            tween: Tween(
+              begin: Offset(-SizeMg.width(375), 0),
+              end: Offset.zero,
+            ),
+            duration: const Duration(milliseconds: 200),
+            builder: (_, offset, __) => Transform.translate(
+              offset: offset,
+              child: child,
+            ),
+          );
   }
 }

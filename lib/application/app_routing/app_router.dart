@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/dashboard/dashboard_view.dart';
+import '../../features/home/presentation/views/rate_passengers_view.dart';
 import 'app_routes.dart';
 
 class AppRouter {
@@ -17,11 +18,17 @@ class AppRouter {
           settings,
           view: const Scaffold(),
         );
-        
+
       case dashboardRoute:
         return _getPageRoute(
           settings,
           view: const DashboardView(),
+        );
+
+      case ratePassengersViewRoute:
+        return _getPageRoute(
+          settings,
+          view: const RatePassengersView(),
         );
 
       default:
