@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'application/app_dependencies/app_dependencies.dart';
 import 'application/app_routing/app_navigator.dart';
 import 'application/app_routing/app_router.dart';
 import 'application/app_view/app_view.dart';
@@ -10,7 +9,10 @@ import 'utilities/constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  AppDependencies.i.register();
+  await Future.wait([
+    AppDependencies.i.register(),
+    AssetsMg.initMapMarkers(),
+  ]);
   runApp(const ThisApp());
 }
 

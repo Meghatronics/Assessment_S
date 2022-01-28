@@ -1,0 +1,97 @@
+{
+    "id": "ABZYX",
+    "driver_id": "Ab12",
+    "start_time": "2022-01-28",
+    "duration_in_minutes": 40,
+    "stops": [
+        {
+            "name": "Chevron, Lekki II",
+            "lat_lng": {
+                "lat": 0.0,
+                "long": 0.0
+            },
+            "pick_ups": [
+                {
+                    "id": "ABZYX",
+                    "name": "Emmanuel Aliyu",
+                    "image_url": "https://randomuser.me/api/portraits/thumb/men/75.jpg"
+                },
+                {
+                    "id": "ABZYX",
+                    "name": "Emmanuel Aliyu",
+                    "image_url": "https://randomuser.me/api/portraits/thumb/men/75.jpg"
+                },
+                {
+                    "id": "ABZYX",
+                    "name": "Emmanuel Aliyu",
+                    "image_url": "https://randomuser.me/api/portraits/thumb/men/75.jpg"
+                }
+            ]
+        },
+        {
+            "name": "Agungi",
+            "lat_lng": {
+                "lat": 0.0,
+                "long": 0.0
+            },
+            "pick_ups": [
+                {
+                    "id": "ABZYX",
+                    "name": "Emmanuel Aliyu",
+                    "image_url": "https://randomuser.me/api/portraits/thumb/men/75.jpg"
+                },
+                {
+                    "id": "ABZYX",
+                    "name": "Emmanuel Aliyu",
+                    "image_url": "https://randomuser.me/api/portraits/thumb/men/75.jpg"
+                },
+                {
+                    "id": "ABZYX",
+                    "name": "Emmanuel Aliyu",
+                    "image_url": "https://randomuser.me/api/portraits/thumb/men/75.jpg"
+                }
+            ],
+            "drop_offs": [
+                {
+                    "id": "ABZYX",
+                    "name": "Emmanuel Aliyu",
+                    "image_url": "https://randomuser.me/api/portraits/thumb/men/75.jpg"
+                },
+                {
+                    "id": "ABZYX",
+                    "name": "Emmanuel Aliyu",
+                    "image_url": "https://randomuser.me/api/portraits/thumb/men/75.jpg"
+                },
+                {
+                    "id": "ABZYX",
+                    "name": "Emmanuel Aliyu",
+                    "image_url": "https://randomuser.me/api/portraits/thumb/men/75.jpg"
+                }
+            ]
+        },
+        {
+            "name": "Sandfill, Lekki 1",
+            "lat_lng": {
+                "lat": 0.0,
+                "long": 0.0
+            },
+            "drop_offs": [
+                {
+                    "id": "ABZYX",
+                    "name": "Emmanuel Aliyu",
+                    "image_url": "https://randomuser.me/api/portraits/thumb/men/75.jpg"
+                },
+                {
+                    "id": "ABZYX",
+                    "name": "Emmanuel Aliyu",
+                    "image_url": "https://randomuser.me/api/portraits/thumb/men/75.jpg"
+                },
+                {
+                    "id": "ABZYX",
+                    "name": "Emmanuel Aliyu",
+                    "image_url": "https://randomuser.me/api/portraits/thumb/men/75.jpg"
+                }
+            ]
+        }
+    ]
+}

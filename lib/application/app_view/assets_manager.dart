@@ -1,7 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AssetsMg {
   const AssetsMg();
+
+  static Future<void> initMapMarkers() async {
+    stopMapMarker = await BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(),
+      'assets/images/shuttler_bus.png',
+    );
+    startMapMarker = await BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(),
+      'assets/images/shuttler_bus.png',
+    );
+    endMapMarker = await BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(),
+      'assets/images/shuttler_bus.png',
+    );
+  }
+
   static const _imagesDir = 'assets/images';
   static const _iconsDir = 'assets/icons';
 
@@ -23,6 +40,11 @@ class AssetsMg {
   static const busIconRounded = AssetImage('$_iconsDir/bus_icon_rounded.png');
   static const documentIcon = AssetImage('$_iconsDir/document_icon.png');
   static const caretRightIcon = AssetImage('$_iconsDir/caret_right.png');
+
+  // MAP MARKERS
+  static late final BitmapDescriptor stopMapMarker;
+  static late final BitmapDescriptor startMapMarker;
+  static late final BitmapDescriptor endMapMarker;
 
   // OTHERS
   static const mapStyle = 'assets/map_style.json';

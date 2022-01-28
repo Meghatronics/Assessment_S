@@ -9,7 +9,7 @@ class AppDependencies {
   static final i = AppDependencies._();
   static final locate = GetIt.instance;
 
-  void register() {
+  Future<void> register() async {
     _homeDependencies();
   }
 

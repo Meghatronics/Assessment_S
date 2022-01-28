@@ -2,29 +2,10 @@ import 'package:sliding_sheet/sliding_sheet.dart';
 
 import '../../../../application/app_view/size_manager.dart';
 import '../../../../application/app_view_model/app_view_model.dart';
+import '../../domain/enums/home_vm_state_enum.dart';
 import 'home_map_view_model.dart';
 
-enum HomeVmState {
-  none,
-
-  /// App is checking for upcoming trips
-  checkingTrip,
-
-  /// Logged in user has no upcoming trips
-  noTrip,
-
-  /// Upcoming trip is yet to start. Start Trip buttons and itenery show
-  atStart,
-
-  /// Trip is ongoing and Driver is not at a Stop
-  driving,
-
-  /// Trip is ongoing and Driver is at a Stop, checking in and out passengers
-  atStop,
-
-  /// Trip is completed. End Trip button shows
-  atEnd,
-}
+export '../../domain/enums/home_vm_state_enum.dart';
 
 extension HomeVmStateData on HomeVmState {
   SnapSpec get snapSpec {

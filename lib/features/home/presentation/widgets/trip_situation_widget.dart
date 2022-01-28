@@ -30,7 +30,7 @@ class TripSituationWidget extends StatelessWidget {
             child: Row(
               children: [
                 SizedBox.square(
-                  dimension: SizeMg.radius(32),
+                  dimension: SizeMg.width(32),
                   child: _TripSituationIcon(
                     driving: tripState == HomeVmState.driving,
                   ),
@@ -47,7 +47,7 @@ class TripSituationWidget extends StatelessWidget {
                           color: ColorsMg.primaryLighter,
                         ),
                       ),
-                      SizedBox(height: SizeMg.padV(4)),
+                      SizedBox(height: SizeMg.padV(2)),
                       Text(
                         'Osapa London',
                         style: StyleMg.alt0medium.copyWith(
@@ -91,9 +91,10 @@ class _TripSituationIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (driving) {
-      return const Icon(
+      return  Icon(
         Icons.arrow_upward_rounded,
         color: ColorsMg.primaryLighter,
+        size: SizeMg.width(30),
       );
     } else {
       return Container(
@@ -106,8 +107,9 @@ class _TripSituationIcon extends StatelessWidget {
           ),
         ),
         child: Container(
-          height: 9,
-          margin: const EdgeInsets.all(11),
+          height: SizeMg.width(9),
+          width: SizeMg.width(9),
+          margin:  EdgeInsets.all(SizeMg.width(11)),
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.white,
