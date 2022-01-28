@@ -4,13 +4,14 @@ import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../application/app_routing/app_navigator.dart';
+import '../../../../application/app_view/app_view.dart';
 import 'trip_stop_model.dart';
 
 class Trip {
   final String id;
   final Set<TripStop> stops;
   final DateTime startTime;
-  final Duration estimateDuration;
+  final int estimateDuration;
 
   const Trip({
     required this.id,
@@ -35,6 +36,9 @@ class Trip {
     return Polyline(
       polylineId: PolylineId(id),
       points: stops.map((stop) => stop.location.toLatLng()).toList(),
+      endCap: Cap.roundCap,
+      startCap: Cap.roundCap,
+      color: ColorsMg.grey3,
     );
   }
 
@@ -44,14 +48,20 @@ class Trip {
     final stops = <TripStop>{};
     if (json['stops'] != null) {
       json['stops'].forEach((v) {
-        stops.add(TripStop.fromJson(v));
+        if ((json['stops'] as List).first == v) {
+          stops.add(TripStop.fromJson(v, TripStopType.start));
+        } else if ((json['stops'] as List).last == v) {
+          stops.add(TripStop.fromJson(v, TripStopType.end));
+        } else {
+          stops.add(TripStop.fromJson(v, TripStopType.stop));
+        }
       });
     }
     return Trip(
       id: json['id'],
       startTime: DateTime.tryParse(startTime) ??
           DateTime.now().add(const Duration(minutes: 5)),
-      estimateDuration: Duration(minutes: durationInMinutes ?? 40),
+      estimateDuration: durationInMinutes ?? 70,
       stops: stops,
     );
   }
@@ -64,37 +74,3 @@ class Trip {
     return demoTrip;
   }
 }
-
-  // static Trip demo() => Trip(
-  //       startTime: DateTime.now(),
-  //       stops: {
-  //         TripStop(
-  //           name: 'Chevron, Lekki II',
-  //           location: Location(0, 0),
-  //           pickUps: {
-  //             Passenger(
-  //               id: 'ABCDE',
-  //               name: 'Emmanuel Aliyu',
-  //               imageUrl: '',
-  //             ),
-  //             Passenger(
-  //               id: 'FGHIJ',
-  //               name: 'Samuel Abada',
-  //               imageUrl: '',
-  //             ),
-  //             Passenger(
-  //               id: 'KLMNO',
-  //               name: 'Johnson Suleiman',
-  //               imageUrl: '',
-  //             ),
-  //             Passenger(
-  //               id: 'PQRST',
-  //               name: 'Wizkid Ayomikun',
-  //               imageUrl: '',
-  //             ),
-  //           },
-  //           dropOffs: {},
-  //         )
-  //       },
-  //       estimateDuration: const Duration(hours: 1, minutes: 45),
-  //     );

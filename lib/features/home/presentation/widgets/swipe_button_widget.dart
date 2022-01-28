@@ -36,7 +36,7 @@ class SwipeButtonWidget extends SwipeableTile {
                     color: labelColor,
                   ),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 const ChevronAnimation(),
               ],
             ),
@@ -56,43 +56,47 @@ class ChevronAnimation extends StatefulWidget {
 }
 
 class _ChevronAnimationState extends State<ChevronAnimation>
-    with TickerProviderStateMixin {
-  late final List<AnimationController> _controllers;
-  late final List<Animation<double>> _animations;
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<int> _animation;
 
   @override
   void initState() {
-    _controllers = List.generate(
-      6,
-      (index) => AnimationController(
-          value: _opacityTrail[index],
-          animationBehavior: AnimationBehavior.preserve,
-          vsync: this,
-          lowerBound: 0,
-          upperBound: 1,
-          duration: const Duration(milliseconds: 1500))
-        ..repeat().orCancel
-        ..addListener(() {
-          setState(() {});
-        }),
+    _controller = AnimationController(
+        animationBehavior: AnimationBehavior.preserve,
+        vsync: this,
+        lowerBound: 0,
+        upperBound: 1,
+        duration: const Duration(milliseconds: 1500))
+      ..addListener(() {
+        setState(() {});
+      });
+
+    _animation = IntTween(begin: 1, end: 6).animate(
+      _controller
+      /*  CurvedAnimation(
+      curve: Curves.easeInSine,
+      parent: _controller,
+    ) */
+      ,
     );
 
-    _animations = _controllers
-        .map((e) => Tween<double>(begin: 1, end: 0).animate(CurvedAnimation(
-              curve: Curves.easeInSine,
-              parent: e,
-            )))
-        .toList();
+    _controller.repeat();
 
     super.initState();
   }
 
-  static const _opacityTrail = [0.2, 0.35, 0.5, 0.65, 0.8, 0.95];
+  final opacityValues = [
+    [0.2, 0.35, 0.5, 0.65, 0.8, 0.95],
+    [0.95, 0.2, 0.35, 0.5, 0.65, 0.8],
+    [0.8, 0.95, 0.2, 0.35, 0.5, 0.65],
+    [0.65, 0.8, 0.95, 0.2, 0.35, 0.5],
+    [0.5, 0.65, 0.8, 0.95, 0.2, 0.35],
+    [0.35, 0.5, 0.65, 0.8, 0.95, 0.2],
+  ];
   @override
   void dispose() {
-    for (var element in _controllers) {
-      element.dispose();
-    }
+    _controller.dispose();
     super.dispose();
   }
 
@@ -103,7 +107,7 @@ class _ChevronAnimationState extends State<ChevronAnimation>
       children: [
         for (int i = 0; i < 5; i++)
           AnimatedOpacity(
-            opacity: _animations[5 - i].value,
+            opacity: opacityValues[i][_animation.value - 1],
             duration: const Duration(microseconds: 500),
             // curve: Curves.fastOutSlowIn,
             child: const Padding(
@@ -124,3 +128,72 @@ class _ChevronAnimationState extends State<ChevronAnimation>
     );
   }
 }
+// class _ChevronAnimationState extends State<ChevronAnimation>
+//     with TickerProviderStateMixin {
+//   late final List<AnimationController> _controllers;
+//   late final List<Animation<double>> _animations;
+
+//   @override
+//   void initState() {
+//     _controllers = List.generate(
+//       6,
+//       (index) => AnimationController(
+//           value: _opacityTrail[index],
+//           animationBehavior: AnimationBehavior.preserve,
+//           vsync: this,
+//           lowerBound: 0,
+//           upperBound: 1,
+//           duration: const Duration(milliseconds: 1500))
+//         ..repeat().orCancel
+//         ..addListener(() {
+//           setState(() {});
+//         }),
+//     );
+
+//     _animations = _controllers
+//         .map((e) => Tween<double>(begin: 1, end: 0).animate(CurvedAnimation(
+//               curve: Curves.easeInSine,
+//               parent: e,
+//             )))
+//         .toList();
+
+//     super.initState();
+//   }
+
+//   static const _opacityTrail = [0.2, 0.35, 0.5, 0.65, 0.8, 0.95];
+//   @override
+//   void dispose() {
+//     for (var element in _controllers) {
+//       element.dispose();
+//     }
+//     super.dispose();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       mainAxisSize: MainAxisSize.min,
+//       children: [
+//         for (int i = 0; i < 5; i++)
+//           AnimatedOpacity(
+//             opacity: _animations[5 - i].value,
+//             duration: const Duration(microseconds: 500),
+//             // curve: Curves.fastOutSlowIn,
+//             child: const Padding(
+//               padding: EdgeInsets.symmetric(horizontal: 0.0),
+//               child: Image(
+//                 image: AssetsMg.caretRightIcon,
+//                 // width: 16,
+//                 height: 12,
+//               ),
+//               // Icon(
+//               //   Icons.chevron_right_rounded,
+//               //   color: Color(0xFFEDFDF5),
+//               //   size: 32,
+//               // ),
+//             ),
+//           )
+//       ],
+//     );
+//   }
+// }

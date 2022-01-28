@@ -20,7 +20,7 @@ class DashboardView extends StatelessWidget {
         ),
         bottomNavigationBar: CustomNavBar(
           key: navBar,
-          profileImage: AssetsMg.homeIcon,
+          profileImage: AssetsMg.dummyImage,
         ),
       ),
     );

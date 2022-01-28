@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shuttlers_test/utilities/constants.dart';
 
 import '../../../../application/app_view/app_view.dart';
 import '../../../../shared/widgets/app_loading_indicator_widget.dart';
@@ -59,15 +58,10 @@ class PassengersAtStopWidget extends StatelessWidget {
                 ),
               ),
             ),
-            // Flexible(
-            //   child:
-            // TabBarView(
-            //   physics: const NeverScrollableScrollPhysics(),
-            //   children: [
             Column(
               children: List.generate(
                 4,
-                (_) => _PassengerListTile(),
+                (_) => const _PassengerListTile(),
               ),
             ),
           ],

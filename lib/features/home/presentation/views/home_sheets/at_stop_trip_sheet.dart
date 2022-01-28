@@ -26,6 +26,7 @@ class AtStopTripSheet extends StatelessWidget {
         // Divider
         const Divider(),
         // Passengers for stop
+        const SizedBox(height: 8),
         PassengersAtStopWidget(
           stopName: stopName,
         ),

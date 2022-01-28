@@ -6,16 +6,21 @@ class AssetsMg {
 
   static Future<void> initMapMarkers() async {
     stopMapMarker = await BitmapDescriptor.fromAssetImage(
-      const ImageConfiguration(),
-      'assets/images/shuttler_bus.png',
+      const ImageConfiguration(devicePixelRatio: 0.5),
+      // 'assets/images/shuttler_bus.png',
+      'assets/images/map_markers/stop_marker.png',
     );
     startMapMarker = await BitmapDescriptor.fromAssetImage(
       const ImageConfiguration(),
-      'assets/images/shuttler_bus.png',
+      'assets/images/map_markers/start_marker.png',
     );
     endMapMarker = await BitmapDescriptor.fromAssetImage(
       const ImageConfiguration(),
-      'assets/images/shuttler_bus.png',
+      'assets/images/map_markers/destination_marker.png',
+    );
+    busMapMarker = await BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(),
+      'assets/images/map_markers/bus_marker.png',
     );
   }
 
@@ -45,6 +50,7 @@ class AssetsMg {
   static late final BitmapDescriptor stopMapMarker;
   static late final BitmapDescriptor startMapMarker;
   static late final BitmapDescriptor endMapMarker;
+  static late final BitmapDescriptor busMapMarker;
 
   // OTHERS
   static const mapStyle = 'assets/map_style.json';

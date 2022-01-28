@@ -3,9 +3,86 @@ import 'package:sliding_sheet/sliding_sheet.dart';
 import '../../../../application/app_view/size_manager.dart';
 import '../../../../application/app_view_model/app_view_model.dart';
 import '../../domain/enums/home_vm_state_enum.dart';
+import '../../domain/models/trip_model.dart';
 import 'home_map_view_model.dart';
 
 export '../../domain/enums/home_vm_state_enum.dart';
+
+class HomeViewModel extends AppViewModel {
+  HomeVmState _state = HomeVmState.none;
+  final SheetController _sheetController;
+  final HomeMapViewModel mapViewModel;
+
+  Trip? _trip;
+  String _stopName = 'Osapa London';
+
+  HomeViewModel({
+    required this.mapViewModel,
+  }) : _sheetController = SheetController();
+
+  HomeVmState get state => _state;
+  SheetController get sheetController => _sheetController;
+  String get currentStopName => _stopName;
+  String get tripStartPoint => _trip?.startStop.name ?? '';
+  String get tripDestinationPoint => _trip?.destinationStop.name ?? '';
+
+  void _changeState(HomeVmState newState) {
+    _state = newState;
+    mapViewModel.update(_state);
+    _sheetController.snapToExtent(
+      _state.snapSpec.initialSnap ?? _state.snapSpec.minSnap,
+    );
+    setState();
+  }
+
+  void checkForTrip() {
+    if (_state == HomeVmState.none || _state == HomeVmState.noTrip) {
+      _checkForTrip();
+    }
+  }
+
+  Future<void> _checkForTrip() async {
+    _changeState(HomeVmState.checkingTrip);
+    await Future.delayed(const Duration(seconds: 2));
+    _changeState(HomeVmState.noTrip);
+    await Future.delayed(const Duration(seconds: 2));
+    _changeState(HomeVmState.checkingTrip);
+    await Future.delayed(const Duration(seconds: 2));
+    // Fetch trip
+    _trip = await Trip.demo();
+    if (_trip != null) {
+      mapViewModel.foundTrip(_trip!);
+    }
+    _changeState(HomeVmState.atStart);
+  }
+
+  void startTrip() {
+    //TODO Implement StartTrip
+    _changeState(HomeVmState.driving);
+    Future.delayed(const Duration(seconds: 4), () {
+      _changeState(HomeVmState.atStop);
+    });
+  }
+
+  void continueTrip() {
+    //TODO Implement ContinueTrip
+    if (_stopName == 'Osapa London') {
+      _stopName = 'Lagoon front';
+      startTrip();
+    } else {
+      _stopName = 'Sandfill, Lekki';
+      _changeState(HomeVmState.driving);
+      Future.delayed(const Duration(seconds: 4), () {
+        _changeState(HomeVmState.atEnd);
+      });
+    }
+  }
+
+  void endTrip() {
+    _changeState(HomeVmState.noTrip);
+    AppNavigator.pushNamed(ratePassengersViewRoute);
+  }
+}
 
 extension HomeVmStateData on HomeVmState {
   SnapSpec get snapSpec {
@@ -39,14 +116,14 @@ extension HomeVmStateData on HomeVmState {
       case HomeVmState.driving:
         return SnapSpec(
           snap: true,
-          snappings: [SizeMg.height(112), SizeMg.height(336)],
+          snappings: [SizeMg.height(112 + 56 + 16), SizeMg.height(336)],
           positioning: SnapPositioning.pixelOffset,
-          initialSnap: SizeMg.height(112),
+          initialSnap: SizeMg.height(112 + 56 + 16),
         );
       case HomeVmState.atStop:
         return SnapSpec(
           snap: true,
-          snappings: [SizeMg.height(360 + 56 + 16), SizeMg.height(584)],
+          snappings: [SizeMg.height(360 + 56 + 16), SizeMg.height(584 + 72)],
           positioning: SnapPositioning.pixelOffset,
           initialSnap: SizeMg.height(360 + 56 + 16),
         );
@@ -65,72 +142,5 @@ extension HomeVmStateData on HomeVmState {
           initialSnap: 0.2,
         );
     }
-  }
-}
-
-class HomeViewModel extends AppViewModel {
-  HomeVmState _state = HomeVmState.none;
-  final SheetController _sheetController;
-  final HomeMapViewModel mapViewModel;
-
-  HomeViewModel({
-    required this.mapViewModel,
-  }) : _sheetController = SheetController();
-
-  HomeVmState get state => _state;
-  SheetController get sheetController => _sheetController;
-  String get stopName => _stopName;
-  String _stopName = 'Osapa London';
-
-  void _changeState(HomeVmState newState) {
-    _state = newState;
-    mapViewModel.update(_state);
-    _sheetController.snapToExtent(
-      _state.snapSpec.initialSnap ?? _state.snapSpec.minSnap,
-    );
-    setState();
-  }
-
-  void checkForTrip() {
-    if (_state == HomeVmState.none || _state == HomeVmState.noTrip) {
-      _checkForTrip();
-    }
-  }
-
-  Future<void> _checkForTrip() async {
-    _changeState(HomeVmState.checkingTrip);
-    await Future.delayed(const Duration(seconds: 2));
-    _changeState(HomeVmState.noTrip);
-    await Future.delayed(const Duration(seconds: 2));
-    _changeState(HomeVmState.checkingTrip);
-    await Future.delayed(const Duration(seconds: 2));
-    _changeState(HomeVmState.atStart);
-  }
-
-  void startTrip() {
-    //TODO Implement StartTrip
-    _changeState(HomeVmState.driving);
-    Future.delayed(const Duration(seconds: 4), () {
-      _changeState(HomeVmState.atStop);
-    });
-  }
-
-  void continueTrip() {
-    //TODO Implement ContinueTrip
-    if (_stopName == 'Osapa London') {
-      _stopName = 'Lagoon front';
-      startTrip();
-    } else {
-      _stopName = 'Sandfill, Lekki';
-      _changeState(HomeVmState.driving);
-      Future.delayed(const Duration(seconds: 4), () {
-        _changeState(HomeVmState.atEnd);
-      });
-    }
-  }
-
-  void endTrip() {
-    _changeState(HomeVmState.noTrip);
-    AppNavigator.pushNamed(ratePassengersViewRoute);
   }
 }

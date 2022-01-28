@@ -22,7 +22,6 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepOrangeAccent,
       body: AppViewBuilder<HomeViewModel>(
         model: AppDependencies.locate(),
         initState: (model) => model.checkForTrip(),
@@ -79,13 +78,13 @@ class _SheetView extends StatelessWidget {
         child = const NextTripSheet();
         break;
       case HomeVmState.driving:
-        child = DrivingSheet(stopName: model.stopName);
+        child = DrivingSheet(stopName: model.currentStopName);
         break;
       case HomeVmState.atStop:
-        child = AtStopTripSheet(stopName: model.stopName);
+        child = AtStopTripSheet(stopName: model.currentStopName);
         break;
       case HomeVmState.atEnd:
-        child = AtEndTripSheet(stopName: model.stopName);
+        child = AtEndTripSheet(stopName: model.currentStopName);
         break;
     }
     return child;
@@ -162,35 +161,30 @@ class _SheetFooter extends StatelessWidget {
   final HomeViewModel model;
   final SheetState sheetState;
 
-  static final _heightA = SizeMg.height(50);
-  static final _heightB = SizeMg.height(92);
   @override
   Widget build(BuildContext context) {
     Widget child;
-    double height;
+
     switch (model.state) {
       case HomeVmState.none:
       case HomeVmState.checkingTrip:
       case HomeVmState.noTrip:
         child = const SizedBox.shrink();
-        height = 0;
+
         break;
       case HomeVmState.atStart:
-        height = _heightA;
         child = SwipeButtonWidget(
           label: 'Start Trip',
           onSwipe: model.startTrip,
         );
         break;
       case HomeVmState.driving:
-        height = _heightA;
         child = const BlackStartToEndSummary(
           start: 'Chevron Lekki II',
           end: 'Sandfill, Lekki I',
         );
         break;
       case HomeVmState.atStop:
-        height = sheetState.isCollapsed ? _heightA : _heightB;
         child = Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -207,7 +201,6 @@ class _SheetFooter extends StatelessWidget {
         );
         break;
       case HomeVmState.atEnd:
-        height = sheetState.isCollapsed ? _heightA : _heightB;
         child = Column(
           mainAxisSize: MainAxisSize.min,
           children: [

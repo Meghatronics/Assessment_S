@@ -20,7 +20,9 @@ class TripSituationWidget extends StatelessWidget {
                 topRight: Radius.circular(SizeMg.radius(16)),
                 topLeft: Radius.circular(SizeMg.radius(16)),
                 bottomRight: Radius.circular(SizeMg.radius(16)),
-                bottomLeft: Radius.zero,
+                bottomLeft: (tripState != HomeVmState.atEnd)
+                    ? Radius.zero
+                    : Radius.circular(SizeMg.radius(16)),
               ),
             ),
             padding: EdgeInsets.symmetric(
@@ -42,7 +44,11 @@ class TripSituationWidget extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        'Arrived at BABAVSBDS',
+                        tripState == HomeVmState.atStop
+                            ? 'Arrived at Stop 1'
+                            : tripState == HomeVmState.atEnd
+                                ? 'Arrived at Destination'
+                                : 'Next Bustop',
                         style: StyleMg.medium14.copyWith(
                           color: ColorsMg.primaryLighter,
                         ),
@@ -59,27 +65,30 @@ class TripSituationWidget extends StatelessWidget {
                 ),
               ],
             )),
-        Container(
-          decoration: BoxDecoration(
-            color: ColorsMg.greenDark,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.zero,
-              topRight: Radius.zero,
-              bottomLeft: Radius.circular(SizeMg.radius(16)),
-              bottomRight: Radius.circular(SizeMg.radius(16)),
+        if (tripState != HomeVmState.atEnd)
+          Container(
+            decoration: BoxDecoration(
+              color: ColorsMg.greenDark,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.zero,
+                topRight: Radius.zero,
+                bottomLeft: Radius.circular(SizeMg.radius(16)),
+                bottomRight: Radius.circular(SizeMg.radius(16)),
+              ),
             ),
-          ),
-          padding: EdgeInsets.symmetric(
-            horizontal: SizeMg.padH(16),
-            vertical: SizeMg.padV(12),
-          ),
-          child: Text(
-            'data',
-            style: StyleMg.medium14.copyWith(
-              color: ColorsMg.backgroundWhite,
+            padding: EdgeInsets.symmetric(
+              horizontal: SizeMg.padH(16),
+              vertical: SizeMg.padV(12),
             ),
-          ),
-        )
+            child: Text(
+              tripState == HomeVmState.atStop
+                  ? 'Next Stop: Agungi'
+                  : '3 min • 100 KM',
+              style: StyleMg.medium14.copyWith(
+                color: ColorsMg.backgroundWhite,
+              ),
+            ),
+          )
       ],
     );
   }
@@ -91,7 +100,7 @@ class _TripSituationIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (driving) {
-      return  Icon(
+      return Icon(
         Icons.arrow_upward_rounded,
         color: ColorsMg.primaryLighter,
         size: SizeMg.width(30),
@@ -109,7 +118,7 @@ class _TripSituationIcon extends StatelessWidget {
         child: Container(
           height: SizeMg.width(9),
           width: SizeMg.width(9),
-          margin:  EdgeInsets.all(SizeMg.width(11)),
+          margin: EdgeInsets.all(SizeMg.width(11)),
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.white,

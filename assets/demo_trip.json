@@ -7,8 +7,8 @@
         {
             "name": "Chevron, Lekki II",
             "lat_lng": {
-                "lat": 0.0,
-                "long": 0.0
+                "lat": 7.150130,
+                "long": 3.346030
             },
             "pick_ups": [
                 {
@@ -31,8 +31,8 @@
         {
             "name": "Agungi",
             "lat_lng": {
-                "lat": 0.0,
-                "long": 0.0
+                "lat": 7.149980,
+                "long": 3.347000
             },
             "pick_ups": [
                 {
@@ -72,8 +72,8 @@
         {
             "name": "Sandfill, Lekki 1",
             "lat_lng": {
-                "lat": 0.0,
-                "long": 0.0
+                "lat": 7.147787,
+                "long": 3.347494
             },
             "drop_offs": [
                 {
