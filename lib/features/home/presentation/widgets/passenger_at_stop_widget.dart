@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../application/app_view/app_view.dart';
+import '../../../../application/app_view_model/app_toast.dart';
 import '../../../../shared/widgets/app_loading_indicator_widget.dart';
 
 class PassengersAtStopWidget extends StatelessWidget {
@@ -58,10 +59,34 @@ class PassengersAtStopWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Column(
-              children: List.generate(
-                4,
-                (_) => const _PassengerListTile(),
+            const SizedBox(height: 8),
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: (SizeMg.radius(24) + SizeMg.padV(16)) * 4,
+              ),
+              child: TabBarView(
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: List.generate(
+                      4,
+                      (_) => _PassengerListTile(
+                        i: _,
+                        checkoutTile: false,
+                      ),
+                    ),
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: List.generate(
+                      4,
+                      (_) => _PassengerListTile(
+                        i: _,
+                        checkoutTile: true,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -75,7 +100,14 @@ class PassengersAtStopWidget extends StatelessWidget {
 }
 
 class _PassengerListTile extends StatelessWidget {
-  const _PassengerListTile({Key? key}) : super(key: key);
+  const _PassengerListTile({
+    Key? key,
+    required this.i,
+    required this.checkoutTile,
+  }) : super(key: key);
+
+  final int i;
+  final bool checkoutTile;
 
   @override
   Widget build(BuildContext context) {
@@ -105,12 +137,33 @@ class _PassengerListTile extends StatelessWidget {
               ),
             ),
           ),
-          _PassengerButton.checkIn(
-            onPressed: () async {
-              await Future.delayed(const Duration(seconds: 3));
-              return true;
-            },
-          ),
+          checkoutTile
+              ? _PassengerButton.checkOut(
+                  onPressed: () async {
+                    await Future.delayed(const Duration(seconds: 3));
+                    if (i == 3) {
+                      AppToast.error(
+                        'Error checking out passenger',
+                        'An error occured while tryng to check out Robert fox, please check your internet.',
+                      );
+                      return false;
+                    }
+                    return true;
+                  },
+                )
+              : _PassengerButton.checkIn(
+                  onPressed: () async {
+                    await Future.delayed(const Duration(seconds: 3));
+                    if (i == 3) {
+                      AppToast.error(
+                        'Error checking in passenger',
+                        'An error occured while tryng to check in Robert fox, please check your internet.',
+                      );
+                      return false;
+                    }
+                    return true;
+                  },
+                ),
         ],
       ),
     );

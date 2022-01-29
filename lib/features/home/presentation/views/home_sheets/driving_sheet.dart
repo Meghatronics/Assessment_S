@@ -30,7 +30,7 @@ class DrivingSheet extends StatelessWidget {
           margin: EdgeInsets.only(bottom: SizeMg.padV(16)),
         ),
         //Trip itinerary
-        const TripItineraryWidget(),
+        // const TripItineraryWidget(),
         // View Manifest Button
         const ViewManifestButton(),
       ],

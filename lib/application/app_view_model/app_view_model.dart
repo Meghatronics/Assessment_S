@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'vm_state_enum.dart';
 
 export '../app_routing/app_navigator.dart';
+export 'app_toast.dart';
 
 class AppViewModel extends ChangeNotifier {
   VmState _viewState = VmState.none;

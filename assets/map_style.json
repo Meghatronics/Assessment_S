@@ -3,7 +3,7 @@
   "elementType": "geometry.fill",
   "stylers": [
     {
-      "color": "#E13D45"
+      "color": "#d6e2e6"
     }
   ]
 },
@@ -12,7 +12,7 @@
   "elementType": "geometry.stroke",
   "stylers": [
     {
-      "color": "#CFD4D5"
+      "color": "#cfd4d5"
     }
   ]
 },
@@ -26,11 +26,20 @@
   ]
 },
 {
+  "featureType": "administrative.neighborhood",
+  "elementType": "labels.text.fill",
+  "stylers": [
+    {
+      "lightness": 25
+    }
+  ]
+},
+{
   "featureType": "landscape.man_made",
   "elementType": "geometry.fill",
   "stylers": [
     {
-      "color": "#E13D45"
+      "color": "#dde2e3"
     }
   ]
 },
@@ -39,7 +48,7 @@
   "elementType": "geometry.stroke",
   "stylers": [
     {
-      "color": "#CFD4D5"
+      "color": "#cfd4d5"
     }
   ]
 },
@@ -48,7 +57,7 @@
   "elementType": "geometry.fill",
   "stylers": [
     {
-      "color": "#E13D45"
+      "color": "#dde2e3"
     }
   ]
 },
@@ -74,7 +83,7 @@
   "elementType": "geometry.fill",
   "stylers": [
     {
-      "color": "#E13D45"
+      "color": "#dde2e3"
     }
   ]
 },
@@ -101,7 +110,7 @@
   "elementType": "geometry.fill",
   "stylers": [
     {
-      "color": "#E13D45"
+      "color": "#a9de83"
     }
   ]
 },
@@ -161,7 +170,7 @@
   "elementType": "geometry.fill",
   "stylers": [
     {
-      "color": "#FFFFFF"
+      "color": "#ffffff"
     }
   ]
 },
@@ -206,7 +215,7 @@
   "elementType": "geometry.fill",
   "stylers": [
     {
-      "color": "#FFFFFF"
+      "color": "#ffffff"
     }
   ]
 },
@@ -242,7 +251,7 @@
   "elementType": "labels.text.fill",
   "stylers": [
     {
-      "color": "#E13D45"
+      "color": "#008cb5"
     }
   ]
 },
@@ -267,4 +276,4 @@
     }
   ]
 }
-]
+]  

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../application/app_view/assets_manager.dart';
@@ -55,7 +57,7 @@ class TripStop {
     final dropOffs = <Passenger>{};
     if (json['drop_offs'] != null) {
       json['drop_offs'].forEach((v) {
-        dropOffs.add( Passenger.fromJson(v));
+        dropOffs.add(Passenger.fromJson(v));
       });
     }
 
@@ -73,6 +75,8 @@ class TripStop {
       markerId: MarkerId(location.lat.toString()),
       position: location.toLatLng(),
       icon: type.icon,
+      flat: true,
+      anchor: const Offset(0.5, 0.5),
     );
   }
 }

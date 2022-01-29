@@ -7,8 +7,32 @@
         {
             "name": "Chevron, Lekki II",
             "lat_lng": {
-                "lat": 7.150130,
-                "long": 3.346030
+                "lat": 7.1351179,
+                "long": -356.6610321
+            },
+            "pick_ups": [
+                {
+                    "id": "ABZYX",
+                    "name": "Emmanuel Aliyu",
+                    "image_url": "https://randomuser.me/api/portraits/thumb/men/75.jpg"
+                },
+                {
+                    "id": "ABZYX",
+                    "name": "Emmanuel Aliyu",
+                    "image_url": "https://randomuser.me/api/portraits/thumb/men/75.jpg"
+                },
+                {
+                    "id": "ABZYX",
+                    "name": "Emmanuel Aliyu",
+                    "image_url": "https://randomuser.me/api/portraits/thumb/men/75.jpg"
+                }
+            ]
+        },
+        {
+            "name": "Chevron, Lekki II",
+            "lat_lng": {
+                "lat": 7.1372190,
+                "long": -356.6669113
             },
             "pick_ups": [
                 {
@@ -31,8 +55,8 @@
         {
             "name": "Agungi",
             "lat_lng": {
-                "lat": 7.149980,
-                "long": 3.347000
+                "lat": 7.1403355,
+                "long": -356.6628688
             },
             "pick_ups": [
                 {
@@ -72,8 +96,8 @@
         {
             "name": "Sandfill, Lekki 1",
             "lat_lng": {
-                "lat": 7.147787,
-                "long": 3.347494
+                "lat": 7.1422058,
+                "long": -356.6601070
             },
             "drop_offs": [
                 {

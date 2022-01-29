@@ -10,6 +10,34 @@ class StyleMg {
     color: ColorsMg.black1,
   );
 
+  //24
+  static final alt0medium = GoogleFonts.heebo(
+    color: ColorsMg.grey5,
+    fontWeight: FontWeight.w500,
+    fontSize: SizeMg.text(24),
+    height: 1.4,
+  );
+  // static final alt0regular = GoogleFonts.heebo(
+  //   color: ColorsMg.grey5,
+  //   fontWeight: FontWeight.w400,
+  //   fontSize: SizeMg.text(24),
+  //   height: 1.4,
+  // );
+
+  //16
+  static final alt2bold = GoogleFonts.heebo(
+    color: ColorsMg.black1,
+    fontWeight: FontWeight.w700,
+    fontSize: SizeMg.text(16),
+  );
+  // static final alt0regular = GoogleFonts.heebo(
+  //   color: ColorsMg.grey5,
+  //   fontWeight: FontWeight.w400,
+  //   fontSize: SizeMg.text(24),
+  //   height: 1.4,
+  // );
+
+  //14
   static final subtext = GoogleFonts.heebo(
     color: ColorsMg.grey4,
     fontWeight: FontWeight.w400,
@@ -28,19 +56,7 @@ class StyleMg {
     fontSize: SizeMg.text(14),
   );
 
-  static final alt0medium = GoogleFonts.heebo(
-    color: ColorsMg.grey5,
-    fontWeight: FontWeight.w500,
-    fontSize: SizeMg.text(24),
-    height: 1.4,
-  );
-  // static final alt0regular = GoogleFonts.heebo(
-  //   color: ColorsMg.grey5,
-  //   fontWeight: FontWeight.w400,
-  //   fontSize: SizeMg.text(24),
-  //   height: 1.4,
-  // );
-
+  //12
   static final alt4medium = GoogleFonts.heebo(
     color: ColorsMg.grey5,
     fontWeight: FontWeight.w500,
@@ -54,6 +70,7 @@ class StyleMg {
     height: 1.4,
   );
 
+  //10
   static final alt5medium = GoogleFonts.heebo(
     color: ColorsMg.grey5,
     fontWeight: FontWeight.w500,

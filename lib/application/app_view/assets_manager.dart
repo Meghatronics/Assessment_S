@@ -32,6 +32,7 @@ class AssetsMg {
   static const shuttlerBus = AssetImage('$_imagesDir/shuttler_bus.png');
   static const appIcon = AssetImage('$_imagesDir/app_icon.png');
   static const appName = AssetImage('$_imagesDir/app_name.png');
+  static const errorBubbles = AssetImage('$_imagesDir/error_bubbles.png');
 
   // ICONS
   static const homeIcon = AssetImage('$_iconsDir/home_icon.png');

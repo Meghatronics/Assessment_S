@@ -29,10 +29,10 @@ class HomeViewModel extends AppViewModel {
   void _changeState(HomeVmState newState) {
     _state = newState;
     mapViewModel.update(_state);
+    setState();
     _sheetController.snapToExtent(
       _state.snapSpec.initialSnap ?? _state.snapSpec.minSnap,
     );
-    setState();
   }
 
   void checkForTrip() {
@@ -45,9 +45,9 @@ class HomeViewModel extends AppViewModel {
     _changeState(HomeVmState.checkingTrip);
     await Future.delayed(const Duration(seconds: 2));
     _changeState(HomeVmState.noTrip);
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 4));
     _changeState(HomeVmState.checkingTrip);
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     // Fetch trip
     _trip = await Trip.demo();
     if (_trip != null) {
@@ -116,9 +116,9 @@ extension HomeVmStateData on HomeVmState {
       case HomeVmState.driving:
         return SnapSpec(
           snap: true,
-          snappings: [SizeMg.height(112 + 56 + 16), SizeMg.height(336)],
+          snappings: [SizeMg.height(152), SizeMg.height(336)],
           positioning: SnapPositioning.pixelOffset,
-          initialSnap: SizeMg.height(112 + 56 + 16),
+          initialSnap: SizeMg.height(152),
         );
       case HomeVmState.atStop:
         return SnapSpec(
